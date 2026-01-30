@@ -14,5 +14,4 @@ public class Enemy : ScriptableObject
     public float maxSpeed;
     public int damage;
 
-
 }
