@@ -3,6 +3,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public bool canAction;
+    public bool isOpen;
     public bool isUsed;
     public bool isLock;
     public bool hasDialog;
@@ -18,7 +19,7 @@ public class Door : MonoBehaviour
     void PerformAction() {
 
         if (!isUsed && Input.GetKeyDown(KeyCode.Space)) {
-
+            isOpen = !isOpen;
 
         }
 
@@ -28,6 +29,7 @@ public class Door : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider) {
 
         canAction = true;
+
 
         if (collider.CompareTag("Player")) {
             // permitir accionar 
