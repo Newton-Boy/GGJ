@@ -5,33 +5,34 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public TextMeshProUGUI textComponent;
-    public string[] lines;
-    public float textSpeed;
+    public static DialogManager instance;
 
-    public int index;
+    public float dialogSpeed = 0.1f;
 
-    void Start()
+    [SerializeField]
+    TMP_Text textDialog;
+    string text;
+
+
+    private void Awake()
     {
-        textComponent.text = "";
-        StartDialog();
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void ShowDialog(TextAsset dialogFile) {
 
+        if (dialogFile == null) return;
+
+        text = dialogFile.text;
+
+        StartCoroutine(ReadDialog());
     }
 
-    void StartDialog() {
-        StartCoroutine(TypeLine());
-    }
+    IEnumerator ReadDialog() {
 
-    IEnumerator TypeLine() {
-        foreach (char c in lines[index].ToCharArray()) {
-            textComponent.text += c.ToString();
-            yield return new WaitForSeconds(textSpeed);
+        foreach (char c in text.ToCharArray()) {
+            textDialog.text += c;
+            yield return new WaitForSeconds(dialogSpeed);
         }
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
     public bool canAction;
     public bool isOpen;
@@ -9,39 +9,32 @@ public class Door : MonoBehaviour
     public bool hasDialog;
     public string dialog;
     public GameObject key;
+    public string dialogName = "door123";
 
-
-    void Update() {
-
-        PerformAction();
-    }
-
-    void PerformAction() {
-
-        if (!isUsed && Input.GetKeyDown(KeyCode.Space)) {
-            isOpen = !isOpen;
-
-        }
+    void Awake() {
 
     }
 
+    public void Interact()
+    {
+        GetDialog();
+        GameObject action = transform.GetChild(0).gameObject;
+        action.SetActive(!action.activeSelf);
+    }
 
-    void OnTriggerStay2D(Collider2D collider) {
+    public bool CanInteract()
+    {
+        Debug.Log("Otras");
+        return false;
+    }
 
-        canAction = true;
 
-
-        if (collider.CompareTag("Player")) {
-            // permitir accionar 
-            // validar si existe en el inventario la llave
-        }
+    void GetDialog() {
         
+        TextAsset dialog = Resources.Load<TextAsset>("Dialogs/" + dialogName);
+        Debug.Log(dialog);
+        if (dialog == null) return;
+        DialogManager.instance.ShowDialog(dialog);
+
     }
-
-    void OnTriggerExit2D(Collider2D collider) {
-
-        canAction = false;
-
-    }
-
 }
