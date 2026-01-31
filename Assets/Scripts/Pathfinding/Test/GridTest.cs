@@ -10,7 +10,7 @@ public class GridTest : MonoBehaviour
     public NodeTest[,] grid;
 
     private float nodeDiameter;
-    private int gridSizeX, gridSizeY;
+    public int gridSizeX, gridSizeY;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class GridTest : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector2 worldPoint = worldBottomLeft + new Vector2(x * nodeDiameter + nodeRadius, y * nodeDiameter + nodeRadius);
-                bool walkable = Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask) == null;
+                bool walkable = Physics2D.OverlapBox(worldPoint, new Vector2(nodeDiameter, nodeDiameter), 0, unwalkableMask) == null;
                 Debug.Log(walkable);
                 grid[x, y] = new NodeTest(walkable, worldPoint, x, y);
             }
@@ -67,5 +67,21 @@ public class GridTest : MonoBehaviour
         // int y = Mathf.Clamp(Mathf.RoundToInt((gridSizeY - 1) * percentY), 0, gridSizeY - 1);
 
         return grid[x, y];
+    }
+
+    void OnDrawGizmos()
+    {
+        if (grid == null) return;
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                Gizmos.color = grid[x, y].walkable ? Color.green : Color.red;
+                Gizmos.DrawWireCube(grid[x, y].worldPosition, Vector3.one * nodeDiameter * 0.8f);
+            }
+        }
+        // Bonus: nodo del target
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(1.79f, -1.45f) - new Vector2(gridWorldSize.x / 2, gridWorldSize.y / 2), Vector3.one * 0.5f);
     }
 }

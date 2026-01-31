@@ -350,7 +350,7 @@ GameObject:
   m_Layer: 6
   m_Name: Obstac
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -984,9 +984,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 0
-  gridWorldSize: {x: 30, y: 30}
+    m_Bits: 64
+  gridWorldSize: {x: 10, y: 10}
   nodeRadius: 0.5
+  gridSizeX: 0
+  gridSizeY: 0
 --- !u!1 &824885217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1267,7 @@ GameObject:
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1663,7 +1665,7 @@ GameObject:
   m_Layer: 0
   m_Name: seeker
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1745,7 +1747,7 @@ Transform:
   m_GameObject: {fileID: 1808307924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22, y: 1.4, z: 0}
+  m_LocalPosition: {x: -0.25, y: 0.96, z: 0}
   m_LocalScale: {x: 0.41664, y: 0.41664, z: 0.41664}
   m_ConstrainProportionsScale: 0
   m_Children: []
