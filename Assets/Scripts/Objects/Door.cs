@@ -25,13 +25,20 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!DialogManager.instance.dialogEnd) return;
-        Debug.Log("pasa");
+        if (!DialogManager.instance.dialogEnd)
+        {
+            DialogManager.instance.NextLine();
+        }
+        else {
+            Debug.Log("pasa");
 
-        TextAsset dialog = Resources.Load<TextAsset>("Dialogs/" + dialogName);
-        Debug.Log(dialog);
-        if (dialog == null) return;
-        DialogManager.instance.ShowDialog(dialog);
+            TextAsset dialog = Resources.Load<TextAsset>("Dialogs/" + dialogName);
+            Debug.Log(dialog);
+            if (dialog == null) return;
+            DialogManager.instance.ShowDialog(dialog);
+
+        }
+
     }
 
     public bool CanInteract()
