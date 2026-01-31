@@ -8,6 +8,7 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
 
     public float dialogSpeed = 0.1f;
+    public bool dialogEnd;
 
     [SerializeField]
     TMP_Text textDialog;
@@ -22,6 +23,10 @@ public class DialogManager : MonoBehaviour
     public void ShowDialog(TextAsset dialogFile) {
 
         if (dialogFile == null) return;
+
+        dialogEnd = false;
+
+        textDialog.text = "";
 
         text = dialogFile.text;
 

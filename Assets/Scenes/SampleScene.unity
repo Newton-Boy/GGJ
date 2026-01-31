@@ -772,6 +772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bdbd25fd8be3442acb6062f5aaa553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogSpeed: 0.1
+  dialogEnd: 1
   textDialog: {fileID: 1942261533}
 --- !u!1 &1221329493
 GameObject:
@@ -1395,7 +1397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941e14d867cfa33419799294a13f1e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAction: 0
+  IsActionable: 0
   isOpen: 0
   isUsed: 0
   isLock: 0
