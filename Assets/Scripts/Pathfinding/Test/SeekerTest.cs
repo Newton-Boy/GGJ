@@ -24,26 +24,23 @@ public class Seeker : MonoBehaviour
             if (target != null)
             {
                 path = pathfinding.FindPath(transform.position, target.position);
-                index = 0;
-
-                // opcional: snap al nodo inicial
-                NodeTest startNode = pathfinding.FindPath(transform.position, transform.position)[0];
-                transform.position = startNode.worldPosition;
+                index = 0; // Comenzamos desde el primer nodo del path
             }
             yield return new WaitForSeconds(0.25f);
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (path == null || index >= path.Count) return;
-
-        Vector2 targetPos = path[index].worldPosition;
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, targetPos) < 0.05f)
+        if (path != null && index < path.Count)
         {
-            index++;
+            Vector3 targetPos = path[index].worldPosition;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
+
+            if (Vector3.Distance(transform.position, targetPos) < 0.01f)
+            {
+                index++; // Pasamos al siguiente nodo
+            }
         }
     }
 }

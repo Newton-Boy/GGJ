@@ -31,6 +31,7 @@ public class GridTest : MonoBehaviour
             {
                 Vector2 worldPoint = worldBottomLeft + new Vector2(x * nodeDiameter + nodeRadius, y * nodeDiameter + nodeRadius);
                 bool walkable = Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask) == null;
+                Debug.Log(walkable);
                 grid[x, y] = new NodeTest(walkable, worldPoint, x, y);
             }
         }
@@ -58,11 +59,12 @@ public class GridTest : MonoBehaviour
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
-        int x = Mathf.FloorToInt(gridSizeX * percentX);
-        int y = Mathf.FloorToInt(gridSizeY * percentY);
+        int x = Mathf.Clamp(Mathf.FloorToInt(percentX * gridSizeX), 0, gridSizeX - 1);
+        int y = Mathf.Clamp(Mathf.FloorToInt(percentY * gridSizeY), 0, gridSizeY - 1);
 
-        x = Mathf.Clamp(x, 0, gridSizeX - 1);
-        y = Mathf.Clamp(y, 0, gridSizeY - 1);
+        // Alternativa más precisa en los bordes:
+        // int x = Mathf.Clamp(Mathf.RoundToInt((gridSizeX - 1) * percentX), 0, gridSizeX - 1);
+        // int y = Mathf.Clamp(Mathf.RoundToInt((gridSizeY - 1) * percentY), 0, gridSizeY - 1);
 
         return grid[x, y];
     }

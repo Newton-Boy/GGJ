@@ -16,6 +16,8 @@ public class PathfindingTest : MonoBehaviour
         NodeTest startNode = grid.NodeFromWorldPoint(startPos);
         NodeTest targetNode = grid.NodeFromWorldPoint(targetPos);
 
+        Debug.Log($"Target walkable: {targetNode.walkable}, pos: {targetPos}");
+
         // reset
         foreach (NodeTest n in grid.grid)
         {
