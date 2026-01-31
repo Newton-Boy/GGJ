@@ -13,8 +13,10 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        ItemEvents.OnItemPick?.Invoke(itemData);
-        gameObject.SetActive(false);
+        ItemEvents.OnItemPick?.Invoke(new ItemEvents.ItemEventArgs(itemData, "add"));
+        if (itemData.type == ItemData.ItemType.PICKUBLE) { 
+            gameObject.SetActive(false);
+        }
         //Debug.Log("pasa?");
         //switch (Type) {
         //    case ItemType.KEY:

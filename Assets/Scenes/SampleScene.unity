@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa04a55e6719b04391704e92b027f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  inventary: []
   maxItems: 1
   currentObject: {fileID: 0}
   canTakeItem: 0
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4901cc1b93283a4ab4569b1b6e8f7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: f1c72f87fc2644d4fb84d93503579414, type: 2}
 --- !u!1 &1221329493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,6 +2040,7 @@ GameObject:
   - component: {fileID: 2027598921}
   - component: {fileID: 2027598920}
   - component: {fileID: 2027598919}
+  - component: {fileID: 2027598923}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -2059,8 +2060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dbcaa9ef63a6e409101cbad092f17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 0.5
-  speed: 1
+  movement: {x: 0, y: 0}
 --- !u!50 &2027598920
 Rigidbody2D:
   serializedVersion: 5
@@ -2160,6 +2160,22 @@ Transform:
   - {fileID: 1985746175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2027598923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027598918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fadc612feb90e46a120ff6c3ec1935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 0}
+  smooth: 0.5
+  speed: 1
+  maxSpeed: 1
 --- !u!1 &2076691039
 GameObject:
   m_ObjectHideFlags: 0

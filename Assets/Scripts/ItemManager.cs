@@ -29,11 +29,11 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    void AddItem(ItemData item) {
+    void AddItem(ItemEvents.ItemEventArgs itemEvent) {
 
-        if (item.type == ItemData.ItemType.PICKUBLE) {
-            inventary.Add(item);
-            Debug.Log(item.name);
+        if (itemEvent.item.type == ItemData.ItemType.PICKUBLE) {
+            inventary.Add(itemEvent.item);
+            Debug.Log(itemEvent.item.name);
         }
     }
 }

@@ -5,28 +5,13 @@ public class InputController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    Vector2 movement;
-    Rigidbody2D rb;
+    public Vector2 movement;
 
-    public float smooth = 0.5f;
-    public float speed = 1f;
+    public Vector2 GetDirection() {
 
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal") * speed;
-        movement.y = Input.GetAxisRaw("Vertical") * speed;
-
-        Movement();
-    }
-
-    void Movement() {
-        rb.linearVelocity = movement;
+        return movement;
     }
 }
