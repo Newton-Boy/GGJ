@@ -25,6 +25,10 @@ public class Seeker : MonoBehaviour
             {
                 path = pathfinding.FindPath(transform.position, target.position);
                 index = 0;
+
+                // opcional: snap al nodo inicial
+                NodeTest startNode = pathfinding.FindPath(transform.position, transform.position)[0];
+                transform.position = startNode.worldPosition;
             }
             yield return new WaitForSeconds(0.25f);
         }
@@ -32,19 +36,12 @@ public class Seeker : MonoBehaviour
 
     void Update()
     {
-        if (path == null || index >= path.Count)
-            return;
+        if (path == null || index >= path.Count) return;
 
-        Vector3 targetPos = path[index].worldPosition;
-        targetPos.y = transform.position.y;
+        Vector2 targetPos = path[index].worldPosition;
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPos,
-            speed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+        if (Vector2.Distance(transform.position, targetPos) < 0.05f)
         {
             index++;
         }

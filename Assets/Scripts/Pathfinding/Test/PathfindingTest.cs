@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 public class PathfindingTest : MonoBehaviour
 {
@@ -10,14 +11,23 @@ public class PathfindingTest : MonoBehaviour
         grid = GetComponentInChildren<GridTest>();
     }
 
-    public List<NodeTest> FindPath(Vector3 startPos, Vector3 targetPos)
+    public List<NodeTest> FindPath(Vector2 startPos, Vector2 targetPos)
     {
         NodeTest startNode = grid.NodeFromWorldPoint(startPos);
         NodeTest targetNode = grid.NodeFromWorldPoint(targetPos);
 
-        List<NodeTest> openSet = new List<NodeTest>();
+        // reset
+        foreach (NodeTest n in grid.grid)
+        {
+            n.gCost = int.MaxValue;
+            n.hCost = 0;
+            n.parent = null;
+        }
+
+        startNode.gCost = 0;
+
+        List<NodeTest> openSet = new List<NodeTest> { startNode };
         HashSet<NodeTest> closedSet = new HashSet<NodeTest>();
-        openSet.Add(startNode);
 
         while (openSet.Count > 0)
         {
@@ -44,18 +54,14 @@ public class PathfindingTest : MonoBehaviour
                 if (!neighbour.walkable || closedSet.Contains(neighbour))
                     continue;
 
-                int newCost = currentNode.gCost + 1; // 4 direcciones
-
+                int newCost = currentNode.gCost + 1;
                 if (newCost < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = newCost;
-                    neighbour.hCost =
-                        Mathf.Abs(neighbour.gridX - targetNode.gridX) +
-                        Mathf.Abs(neighbour.gridY - targetNode.gridY); // Manhattan
+                    neighbour.hCost = Mathf.Abs(neighbour.gridX - targetNode.gridX) + Mathf.Abs(neighbour.gridY - targetNode.gridY);
                     neighbour.parent = currentNode;
 
-                    if (!openSet.Contains(neighbour))
-                        openSet.Add(neighbour);
+                    if (!openSet.Contains(neighbour)) openSet.Add(neighbour);
                 }
             }
         }
