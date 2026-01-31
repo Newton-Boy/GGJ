@@ -1,14 +1,22 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public GameObject[] items;
+
+
+    public List<ItemData> inventary = new();
     public int maxItems;
     public GameObject currentObject;
     public bool canTakeItem;
 
+    private void OnEnable()
+    {
+        ItemEvents.OnItemPick += AddItem;
+    }
 
     void Start()
     {
@@ -19,5 +27,13 @@ public class ItemManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void AddItem(ItemData item) {
+
+        if (item.type == ItemData.ItemType.PICKUBLE) {
+            inventary.Add(item);
+            Debug.Log(item.name);
+        }
     }
 }

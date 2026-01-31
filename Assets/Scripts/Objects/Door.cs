@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
-    public bool IsActionable;
     public bool isOpen;
     public bool isUsed;
     public bool isLock;
@@ -13,14 +12,6 @@ public class Door : MonoBehaviour, IInteractable
 
     void Awake() {
 
-    }
-
-    void Update() {
-
-        if (Input.GetKeyDown(KeyCode.Space) && IsActionable)
-        {
-            Interact();
-        }
     }
 
     public void Interact()
@@ -51,6 +42,5 @@ public class Door : MonoBehaviour, IInteractable
     public void ShowInteraction() {
         GameObject action = transform.GetChild(0).gameObject;
         action.SetActive(!action.activeSelf);
-        IsActionable = action.activeSelf;
     }
 }
