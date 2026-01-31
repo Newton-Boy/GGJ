@@ -12,6 +12,12 @@ public class InputController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        return movement;
+        if (movement.x != 0) {
+            movement.y = 0f;
+        } else if (movement.y != 0) {
+            movement.x = 0f;
+        }
+
+            return movement;
     }
 }
