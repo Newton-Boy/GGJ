@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    public static ItemManager instance;
 
 
     public List<ItemData> inventary = new();
@@ -13,20 +13,24 @@ public class ItemManager : MonoBehaviour
     public GameObject currentObject;
     public bool canTakeItem;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void OnEnable()
     {
         ItemEvents.OnItemPick += AddItem;
     }
 
-    void Start()
+    public bool HasItem(string itemId)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (var item in inventary)
+        {
+            if (item.itemId == itemId)
+                return true;
+        }
+        return false;
     }
 
     void AddItem(ItemEvents.ItemEventArgs itemEvent) {

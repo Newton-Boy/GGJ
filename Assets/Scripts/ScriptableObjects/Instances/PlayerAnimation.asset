@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015093b1840d406469d4807b6af4272a, type: 3}
+  m_Name: PlayerAnimation
+  m_EditorClassIdentifier: 
+  animations:
+  - name: walk
+    action: 1
+    audio: {fileID: 8300000, guid: b0105bccd48b6004e96c0620f4ae57cb, type: 3}
+  - name: idle
+    action: 1
+    audio: {fileID: 8300000, guid: 6cfde18424182264896e8ffa55356f74, type: 3}

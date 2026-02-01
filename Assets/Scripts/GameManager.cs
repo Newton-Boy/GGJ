@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,5 +13,21 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void MainMenu(int option) {
+        switch (option) {
+            case 1:
+                SceneManager.LoadScene("GameConstruct");
+            break;
+
+            case 2:
+                
+            break;
+
+            case 3:
+                SceneManager.LoadScene("Credits");
+            break;
+        }
     }
 }

@@ -1,4 +1,6 @@
 using UnityEngine;
+using static ItemEvents;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class Door : MonoBehaviour, IInteractable
 {
@@ -9,18 +11,42 @@ public class Door : MonoBehaviour, IInteractable
     public string dialog;
     public GameObject key;
     public string dialogName = "door123";
+    public string requiredKeyId = "puerta123";
+
+    public ActionData actionData;
 
     void Awake() {
-
     }
 
     public void Interact()
     {
+        // Si la puerta está cerrada con llave
+        if (isLock && !isOpen)
+        {
+            // ¿Tengo la llave?
+            if (ItemManager.instance.HasItem(requiredKeyId))
+            {
+                OpenDoor();
+            }
+            else
+            {
+                ShowLockedDialog();
+            }
+            return;
+        }
+
+        // Si no está bloqueada
+        OpenDoor();
+    }
+
+    void ShowLockedDialog() {
+
         if (!DialogManager.instance.dialogEnd)
         {
             DialogManager.instance.NextLine();
         }
-        else {
+        else
+        {
             Debug.Log("pasa");
 
             TextAsset dialog = Resources.Load<TextAsset>("Dialogs/" + dialogName);
@@ -30,6 +56,18 @@ public class Door : MonoBehaviour, IInteractable
 
         }
 
+
+    }
+
+    void OpenDoor()
+    {
+        isOpen = true;
+        isLock = false;
+
+        Debug.Log("Puerta abierta");
+        ActionEvent.onActionExecuted?.Invoke(new ActionEvent.ActionEventArgs(actionData, "opendoor"));
+        // animación
+        // sonido
     }
 
     public bool CanInteract()
@@ -43,4 +81,5 @@ public class Door : MonoBehaviour, IInteractable
         GameObject action = transform.GetChild(0).gameObject;
         action.SetActive(!action.activeSelf);
     }
+
 }

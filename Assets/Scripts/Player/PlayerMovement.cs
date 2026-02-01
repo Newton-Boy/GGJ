@@ -5,11 +5,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     InputController input;
     Rigidbody2D rb;
-
+    Animator animator;
+    AudioSource audioSource;
     public float smooth = 0.5f;
     public float speed = 1;
     public float maxSpeed = 1;
+    public Vector2 lastDir;
+    public bool wasMoving;
 
+    private void Awake()
+    {
+        ActionEvent.onActionExecuted += Relocate;
+    }
     private void OnEnable()
     {
         ItemEvents.OnItemPick += AffectSpeed;
@@ -20,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     {
         input = GetComponent<InputController>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,7 +39,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        rb.linearVelocity = input.GetDirection() * speed;
+        Vector2 dir = input.GetDirection();
+        bool isMoving = dir != Vector2.zero;
+
+        animator.SetBool("isMoving", isMoving);
+
+        if (isMoving)
+            lastDir = dir;
+
+        if (isMoving && !wasMoving)
+        {
+            audioSource.Play();
+        }
+        else if (!isMoving && wasMoving)
+        {
+            audioSource.Stop();
+        }
+
+        wasMoving = isMoving;
+
+        animator.SetFloat("movementX", lastDir.x);
+        animator.SetFloat("movementY", lastDir.y);
+
+        rb.linearVelocity = dir * speed;
     }
 
     void AffectSpeed (ItemEvents.ItemEventArgs itemEvent){
@@ -41,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         else {
             speed = maxSpeed;
         }
+    }
+
+    void Relocate(ActionEvent.ActionEventArgs actionEvent) { 
+    
+        transform.position = actionEvent.actionData.newLocation.transform.position;
     }
 
 }

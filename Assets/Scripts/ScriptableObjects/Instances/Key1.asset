@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e389f95e751e964ab356c5ff6497a51, type: 3}
   m_Name: Key1
   m_EditorClassIdentifier: 
-  itemId: 1
+  type: 0
+  itemId: puerta123
   itemName: Llave Uno
   description: Esta es la llave numero uno
   icon: {fileID: 152281139, guid: f3342c7bbefb88c458f2192af76784c4, type: 3}
+  weight: 0
