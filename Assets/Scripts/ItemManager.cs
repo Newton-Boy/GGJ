@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -10,12 +12,14 @@ public class ItemManager : MonoBehaviour
 
     public List<ItemData> inventary = new();
     public int maxItems;
-    public GameObject currentObject;
     public bool canTakeItem;
+    public RawImage currentItem;
+    public Texture defaultTexture;
 
     private void Awake()
     {
         instance = this;
+        defaultTexture = currentItem.texture;
     }
 
     private void OnEnable()
@@ -35,9 +39,21 @@ public class ItemManager : MonoBehaviour
 
     void AddItem(ItemEvents.ItemEventArgs itemEvent) {
 
-        if (itemEvent.item.type == ItemData.ItemType.PICKUBLE) {
+        if (itemEvent.item.type == ItemData.ItemType.PICKUBLE || itemEvent.item.type == ItemData.ItemType.THROWABLE)
+        {
             inventary.Add(itemEvent.item);
+            currentItem.texture = itemEvent.item.icon.texture;
             Debug.Log(itemEvent.item.name);
+        }
+    }
+
+    public void UseItem(string itemId) {
+        foreach (var item in inventary)
+        {
+            if (item.itemId == itemId && !item.used) {
+                item.used = true;
+                currentItem.texture = defaultTexture;
+            }
         }
     }
 }

@@ -15,5 +15,6 @@ public class ItemData : ScriptableObject
     public string description;
     public Sprite icon;
     public float weight = 0;
+    public bool used;
 
 }

@@ -12,6 +12,6 @@ public class ActionData : ScriptableObject
 
     public string actionName;
     public string description;
-    public GameObject newLocation;
+    public Vector2 newLocation;
 
 }

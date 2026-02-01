@@ -15,4 +15,4 @@ MonoBehaviour:
   type: 0
   actionName: 
   description: 
-  newLocation: {fileID: 8927258658272124033, guid: 1db85074bb280ca44848aa2a5f703346, type: 3}
+  newLocation: {x: -0.24, y: -37.8}

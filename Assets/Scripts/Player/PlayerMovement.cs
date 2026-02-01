@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        Vector2 dir = input.GetDirection();
+        Vector2 dir = input.GetDirection().normalized; // normalized for diagonal movement
         bool isMoving = dir != Vector2.zero;
 
         animator.SetBool("isMoving", isMoving);
@@ -75,8 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Relocate(ActionEvent.ActionEventArgs actionEvent) { 
-    
-        transform.position = actionEvent.actionData.newLocation.transform.position;
+        transform.position = actionEvent.actionData.newLocation;
     }
 
 }

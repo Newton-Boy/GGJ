@@ -16,5 +16,5 @@ MonoBehaviour:
   itemId: puerta123
   itemName: Llave Uno
   description: Esta es la llave numero uno
-  icon: {fileID: 152281139, guid: f3342c7bbefb88c458f2192af76784c4, type: 3}
+  icon: {fileID: 4898770598671448810, guid: a78afa718d0a9c84687f44f6488b10eb, type: 3}
   weight: 0

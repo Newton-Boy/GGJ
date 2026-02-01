@@ -14,7 +14,9 @@ public class Item : MonoBehaviour, IInteractable
     public void Interact()
     {
         ItemEvents.OnItemPick?.Invoke(new ItemEvents.ItemEventArgs(itemData, "add"));
-        if (itemData.type == ItemData.ItemType.PICKUBLE) { 
+        if (itemData.type == ItemData.ItemType.PICKUBLE || itemData.type == ItemData.ItemType.THROWABLE)
+        {
+            Debug.Log("Desctivado");
             gameObject.SetActive(false);
         }
         //Debug.Log("pasa?");

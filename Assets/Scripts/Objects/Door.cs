@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static ItemEvents;
 using static UnityEditor.Timeline.Actions.MenuPriority;
@@ -26,7 +27,7 @@ public class Door : MonoBehaviour, IInteractable
             // ¿Tengo la llave?
             if (ItemManager.instance.HasItem(requiredKeyId))
             {
-                OpenDoor();
+                StartCoroutine(OpenDoor());
             }
             else
             {
@@ -36,7 +37,7 @@ public class Door : MonoBehaviour, IInteractable
         }
 
         // Si no está bloqueada
-        OpenDoor();
+        //OpenDoor();
     }
 
     void ShowLockedDialog() {
@@ -59,13 +60,16 @@ public class Door : MonoBehaviour, IInteractable
 
     }
 
-    void OpenDoor()
+    IEnumerator OpenDoor()
     {
         isOpen = true;
         isLock = false;
 
         Debug.Log("Puerta abierta");
+        ItemManager.instance.UseItem(requiredKeyId);
+        yield return ScreenFader.Instance.FadeOutRoutine();
         ActionEvent.onActionExecuted?.Invoke(new ActionEvent.ActionEventArgs(actionData, "opendoor"));
+        yield return ScreenFader.Instance.FadeInRoutine();
         // animación
         // sonido
     }
