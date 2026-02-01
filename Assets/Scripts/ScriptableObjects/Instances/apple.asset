@@ -16,6 +16,6 @@ MonoBehaviour:
   itemId: 3
   itemName: Manzana
   description: Esta es una Marnzana
-  icon: {fileID: -8536502056984621806, guid: f3342c7bbefb88c458f2192af76784c4, type: 3}
+  icon: {fileID: 1873720502663974095, guid: c2d7a2db2fb02bd4d87121022f70ed13, type: 3}
   weight: 0
   used: 0

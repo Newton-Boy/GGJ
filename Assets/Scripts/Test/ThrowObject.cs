@@ -34,7 +34,8 @@ public class ThrowObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!CanThrow())
+            return;
 
         if (Input.GetKeyDown(KeyCode.V) && !isThrowing) {
             powering = true;
@@ -62,6 +63,11 @@ public class ThrowObject : MonoBehaviour
             finalDir = directions["end"];
             direction = directions["direction"];
         } 
+    }
+
+    bool CanThrow()
+    {
+        return ItemManager.instance.HasThrowable() && !isThrowing;
     }
 
     void CalculateForce() {

@@ -13,13 +13,14 @@ public class ItemManager : MonoBehaviour
     public List<ItemData> inventary = new();
     public int maxItems;
     public bool canTakeItem;
-    public RawImage currentItem;
+    public ItemData currentItem;
+    public RawImage currentItemImg;
     public Texture defaultTexture;
 
     private void Awake()
     {
         instance = this;
-        defaultTexture = currentItem.texture;
+        defaultTexture = currentItemImg.texture;
     }
 
     private void OnEnable()
@@ -37,12 +38,19 @@ public class ItemManager : MonoBehaviour
         return false;
     }
 
+    public bool HasThrowable()
+    {
+        return currentItem != null &&
+               currentItem.type == ItemData.ItemType.THROWABLE;
+    }
+
     void AddItem(ItemEvents.ItemEventArgs itemEvent) {
 
         if (itemEvent.item.type == ItemData.ItemType.PICKUBLE || itemEvent.item.type == ItemData.ItemType.THROWABLE)
         {
             inventary.Add(itemEvent.item);
-            currentItem.texture = itemEvent.item.icon.texture;
+            currentItem = itemEvent.item;
+            currentItemImg.texture = itemEvent.item.icon.texture;
             Debug.Log(itemEvent.item.name);
         }
     }
@@ -52,7 +60,7 @@ public class ItemManager : MonoBehaviour
         {
             if (item.itemId == itemId && !item.used) {
                 item.used = true;
-                currentItem.texture = defaultTexture;
+                currentItemImg.texture = defaultTexture;
             }
         }
     }
